@@ -1,7 +1,9 @@
 const phantom = require('phantom');
+const config = require('./config/default')
+
 module.exports = {
   create: async (ctx, next) => {
-    var URL = 'http://s.hadefile.com/index/44612';
+    var URL = config.urlIndex;
     var instance = await phantom.create();
     var page = await instance.createPage();
     var status = await page.open(URL);
