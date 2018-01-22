@@ -12,7 +12,12 @@ module.exports = {
         var data = [];
         var list = document.querySelectorAll('.show-goods-list')
         for (var i = 0; i < list.length; i++) {
-          data.push({ title: list[i].querySelector('.item-title').innerText })
+          data.push({
+            // 标题
+            title: list[i].querySelector('.item-title').innerText,
+            // 主图地址
+            picPath: list[i].querySelector('img').src
+          })
         }
         return ({
           content: data
