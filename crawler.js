@@ -16,7 +16,9 @@ module.exports = {
             // 标题
             title: list[i].querySelector('.item-title').innerText,
             // 主图地址
-            picPath: list[i].querySelector('img').src
+            picPath: list[i].querySelector('img').src,
+            // 券后价格
+            price: list[i].querySelector('.goods-price-discribe p').innerText
           })
         }
         return ({
