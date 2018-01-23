@@ -8,7 +8,8 @@ module.exports = {
     var page = await instance.createPage();
     var status = await page.open(URL);
     if (status == 'success') {
-      await page.includeJs('https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js');
+      // 
+      await page.includeJs(config.jquery);
       var result = await page.evaluate(function () {
         var a = $('.show-goods-list')
         var data = [];
