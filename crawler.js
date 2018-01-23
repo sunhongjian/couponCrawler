@@ -8,19 +8,22 @@ module.exports = {
     var page = await instance.createPage();
     var status = await page.open(URL);
     if (status == 'success') {
+      await page.includeJs('https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js');
       var result = await page.evaluate(function () {
+        var a = $('.show-goods-list')
         var data = [];
-        var list = document.querySelectorAll('.show-goods-list')
-        for (var i = 0; i < list.length; i++) {
+        var list = $('.show-goods-list');
+        // for (var i = 0; i < list.length; i++) {
+        $.each(list, function (idx, item) {
           data.push({
             // 标题
-            title: list[i].querySelector('.item-title').innerText,
+            title: $(item).find('.item-title').text(),
             // 主图地址
-            picPath: list[i].querySelector('img').src,
+            picPath: $(item).find('img').attr("src"),
             // 券后价格
-            price: list[i].querySelector('.goods-price-discribe p').innerText
+            price: $(item).find('.goods-price-discribe p').text()
           })
-        }
+        })
         return ({
           content: data
         });
