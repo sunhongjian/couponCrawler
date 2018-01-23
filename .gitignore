@@ -17,5 +17,5 @@ node_modules
 demo.coffee
 tmp/
 *.orig
-
+data
 .DS_Store
