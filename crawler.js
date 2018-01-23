@@ -8,21 +8,23 @@ module.exports = {
     var page = await instance.createPage();
     var status = await page.open(URL);
     if (status == 'success') {
-      // 
+      // 引入jq,操作dom
       await page.includeJs(config.jquery);
       var result = await page.evaluate(function () {
         var a = $('.show-goods-list')
         var data = [];
         var list = $('.show-goods-list');
-        // for (var i = 0; i < list.length; i++) {
         $.each(list, function (idx, item) {
+          var $item = $(item);
           data.push({
             // 标题
-            title: $(item).find('.item-title').text(),
+            title: $item.find('.item-title').text(),
             // 主图地址
-            picPath: $(item).find('img').attr("src"),
+            picPath: $item.find('img').attr("src"),
             // 券后价格
-            price: $(item).find('.goods-price-discribe p').text()
+            price: $item.find('.goods-price-discribe p').eq(1).text(),
+            // 券面值
+            couponPrice: $item.find('.goods-price-discribe p').eq(0).text()
           })
         })
         return ({
