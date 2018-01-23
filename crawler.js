@@ -3,6 +3,7 @@ const config = require('./config/default')
 
 module.exports = {
   create: async (ctx, next) => {
+    const start = new Date()
     var URL = config.urlIndex;
     var instance = await phantom.create();
     var page = await instance.createPage();
@@ -39,6 +40,8 @@ module.exports = {
       // });
     }
     await instance.exit();
-
+    // 统计爬虫时间
+    const ms = new Date() - start
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
   },
 }
