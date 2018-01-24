@@ -1,5 +1,6 @@
 const phantom = require('phantom');
-const config = require('./config/default')
+const config = require('./config/default');
+const fs = require('fs');
 
 module.exports = {
   create: async (ctx, next) => {
@@ -12,6 +13,7 @@ module.exports = {
       // 引入jq,操作dom
       await page.includeJs(config.jquery);
       var result = await page.evaluate(function () {
+        //jsonp
         var a = $('.show-goods-list')
         var data = [];
         var list = $('.show-goods-list');
@@ -34,10 +36,10 @@ module.exports = {
       })
       ctx.body = JSON.stringify(result.content);
       // 将数据写入文件
-      // fs.writeFile('./data/data.json', JSON.stringify(result.content), function (err) {
-      //   if (err) throw err;
-      //   console.log('It\'s saved!');
-      // });
+      fs.writeFile('data/data.json', JSON.stringify(result.content), function (err) {
+        if (err) throw err;
+        console.log('It\'s saved!');
+      });
     }
     await instance.exit();
     // 统计爬虫时间
