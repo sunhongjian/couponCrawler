@@ -6,3 +6,6 @@
 npm install
 nodemon app.js
 ```
+
+todo
+[] 将数据写入mongoDb
