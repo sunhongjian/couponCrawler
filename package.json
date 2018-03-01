@@ -9,6 +9,7 @@
   "author": "孙鸿健",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.1.2",
     "koa": "^2.4.1",
     "mongodb": "^3.0.3",
     "phantom": "^4.0.12"
